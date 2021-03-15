@@ -4,8 +4,9 @@
       <p>{{productObject.title}}</p>
       </router-link>
       <p>{{productObject.description}}</p>
-      <p>{{productObject.price}} €</p>
-      <p><a>{{productObject.img}}</a></p>
+      <p>{{productObject.price }}€</p>
+      <p><img :src=productObject.img ></p>
+      <!-- <p>{{productObject.img}}</p> -->
       <!-- <p><img :src="productObject.img" :alt="product.title"></p> -->
   </div>
 </template>

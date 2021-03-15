@@ -8,8 +8,9 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/shop">Shop</router-link> |
       <router-link to="/contact">Contact</router-link> |
-      <router-link to="/account">Account</router-link>
-
+      <router-link to="/account">Account</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/signup">Sign UP</router-link> |
 
     </div>
   </header>

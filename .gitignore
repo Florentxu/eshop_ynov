@@ -2,6 +2,9 @@
 node_modules
 /dist
 consigne1.txt
+consigne2.txt
+consigne3.txt
+
 
 # local env files
 .env.local
