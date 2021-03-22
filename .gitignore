@@ -6,7 +6,7 @@ consigne2.txt
 consigne3.txt
 consigne4.txt
 
-
+.env
 
 # local env files
 .env.local
