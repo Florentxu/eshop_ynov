@@ -19,6 +19,7 @@
     import VueJwtDecode from "vue-jwt-decode";
     import TitlePage from "../components/TitlePage";
     import Bouton from "../components/Button";
+    import apiConfigs from '../configs/api.configs';
     export default {
         components: {
             TitlePage,
@@ -40,7 +41,7 @@
             const token = localStorage.getItem('token');
             if (token){
                 const decodedToken = VueJwtDecode.decode(token);
-                fetch(`https://my-first-api-ynov.herokuapp.com/api/v1/users/${decodedToken.id}`,{
+                fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`,{
                     headers: {
                         Authorization: token,
                     }
