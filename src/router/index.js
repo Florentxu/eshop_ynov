@@ -9,6 +9,7 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import AuthGuard from '../middleware/auth'
 import Cart from '../views/Cart.vue'
+import EditUser from '../views/EditUser.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/product/:id',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/update/:id',
+    name: 'EditUser',
+    component: EditUser
   },
   {
     path: '/login',

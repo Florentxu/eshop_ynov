@@ -1,7 +1,18 @@
 <template>
     <div class="page__shop" >
         <TitlePage title="Mon Eshop" />
-        <ProductsGrid :productsArray="productsFromApi" />
+        <div class="search__form">
+            <input type="text" v-model="searchValue" @keyup="search" />
+        </div>
+        <div class="input__content">
+            Résultat de votre recherche = {{searchValue}}
+            <p>Ancienne recherche = {{oldSearchValue}}</p>
+        </div>
+        <div class="search__content">
+        <ProductsGrid :productsArray="filteredShop" />
+
+        </div>
+        <!-- <ProductsGrid :productsArray="productsFromApi" /> -->
     </div>
 </template>
 
@@ -18,6 +29,8 @@ export default {
     data: function() {
         return {
             productsFromApi: [],
+            searchValue: "",
+            oldSearchValue:"",
         };
     },
     mixins: [ApiProducts],
@@ -38,6 +51,22 @@ export default {
                 this.productsFromApi = data;
             })
             .catch((err) => console.log(err));
+    },
+    methods: {
+        search: function() {
+            console.log(this.searchValue);
+        }
+    },
+    computed:{
+        filteredShop: function(){
+            let filter = new RegExp(this.searchValue, "i");
+            return this.productsFromApi.filter(item => item.title.match(filter));
+        }
+    },
+    watch: {
+        searchValue: function(newValue, oldValue) {
+            this.oldSearchValue = oldValue;
+        }
     },
 };
 </script>

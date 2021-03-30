@@ -6,7 +6,9 @@
                 <p>Nom :{{user.firstName}}</p>
                 <p>Prenom:{{user.lastName}}</p>
                 <p>Email :{{user.email}}</p>
-                <button @click="logout">Déconnexion</button>
+                <p></p>
+                <button @click="goToEdit()">Modifier les informations</button> | 
+                <button @click="logout()">Déconnexion</button>
             </div>
         </div>
         <div v-else>
@@ -28,7 +30,13 @@
         methods: {
             logout: function () {
                 localStorage.removeItem('token');
+                this.$router.push('/login');
                 this.isLogged = false;
+            },
+            goToEdit() {
+                const token = localStorage.getItem('token');
+                const decodedToken = VueJwtDecode.decode(token);
+                this.$router.push({name:'EditUser', params:{ id: `${decodedToken.id}`}})
             }
         },
         data: function () {

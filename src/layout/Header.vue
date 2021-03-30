@@ -11,7 +11,7 @@
       <router-link to="/cart">Panier</router-link> |
       <router-link to="/account">Account</router-link> |
       <router-link to="/login">Login</router-link> |
-      <router-link to="/signup">Sign UP</router-link> |
+      <router-link to="/signup">Sign UP</router-link>
 
     </div>
   </header>

@@ -7,32 +7,44 @@
     >
       <form @submit.prevent="signup">
         <div class="form__group">
-          <label for="lastName">lastName</label>
+          <label for="lastName">Nom de famille</label><br />
           <input type="text" name="lastName" v-model="lastName" />
         </div>
         <div class="form__group">
-          <label for="firstName">firstName</label>
+          <label for="firstName">Prénom</label><br />
           <input type="text" name="firstName" v-model="firstName" />
         </div>
         <div class="form__group">
-          <label for="tel">tel</label>
+          <label for="tel">Téléphone</label><br />
           <input type="text" name="tel" v-model="tel" />
         </div>
         <div class="form__group">
-          <label for="address">address</label>
-          <input type="text" name="address" v-model="address" />
+          <label for="street">Rue</label><br />
+          <input type="text" name="street" v-model="street" />
         </div>
         <div class="form__group">
-          <label for="email">email</label><br />
+          <label for="ccode">Code Postal</label><br />
+          <input type="text" name="ccode" v-model="ccode" />
+        </div>
+        <div class="form__group">
+          <label for="city">Ville</label><br />
+          <input type="text" name="city" v-model="city" />
+        </div>
+        <div class="form__group">
+          <label for="country">Pays</label><br />
+          <input type="text" name="country" v-model="country" />
+        </div>
+        <div class="form__group">
+          <label for="email">Email</label><br />
           <input type="email" name="email" v-model="email" />
         </div>
         <div class="form__group">
-          <label for="password">password</label><br />
+          <label for="password">Mot de passe</label><br />
           <input type="password" name="password" v-model="password" />
         </div>
 
         <div class="form__group">
-          <input type="submit" value="Connexion" />
+          <input type="submit" value="S'inscrire" />
         </div>
       </form>
       <p v-if="messageError">
@@ -58,6 +70,10 @@ export default {
       email: "",
       password: "",
       address: "",
+      street: "",
+      city: "",
+      ccode: "",
+      country: "",
       messageError: "",
     };
   },
@@ -69,7 +85,12 @@ export default {
         tel: this.tel,
         email: this.email,
         password: this.password,
-        address: this.address,
+        address: {
+          street: this.street,
+          city: this.city,
+          ccode: this.ccode,
+          country: this.country
+        }
       };
       console.log(body, "body JS");
       const bodyToSend = JSON.stringify(body);
