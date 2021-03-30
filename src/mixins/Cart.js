@@ -98,9 +98,10 @@ export default {
         },
         getCartTotal(cart) {
             // Montant total a payer
-
+            if (cart){
             let total = cart.reduce((total,item) => total + (item.qty * item.price), 0);
             return total;
+            }
 
         },
         getCartCount(cart) {
@@ -108,8 +109,10 @@ export default {
             // let cart = JSON.parse(localStorage.getItem('cart'))
             // const totalQty = (accumulateur, quantity) => accumulateur + quantity.qty ;
             // return console.log("Qty de cart" ,cart.reduce(totalQty, 0));
+            if (cart){
             let total = cart.reduce((total,item) => total + item.qty, 0);
             return total;
+            }
         }
     }
 }

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <TitlePage :title="myTitle"/>
+        <TitlePage title="Page Contact"/>
         <br>
-        <Bouton buttonClass="btn-black" :buttonName="myTitle"  :buttonFunction="sayHello" />
+        <Bouton buttonClass="btn-black" buttonName="Page Contact"  :buttonFunction="sayHello" />
     </div>
 </template>
 
@@ -17,8 +17,6 @@
         },
         data: function(){
             return{
-                myTitle:"Page Contact"
-
             }
         },
         methods: {

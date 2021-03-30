@@ -30,8 +30,8 @@
         methods: {
             logout: function () {
                 localStorage.removeItem('token');
-                this.$router.push('/login');
                 this.isLogged = false;
+                this.$router.push('/login');
             },
             goToEdit() {
                 const token = localStorage.getItem('token');

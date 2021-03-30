@@ -9,8 +9,10 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import AuthGuard from '../middleware/auth'
 import Cart from '../views/Cart.vue'
+import WishList from '../views/WishList.vue'
 import EditUser from '../views/EditUser.vue'
-
+import Success from '../views/Success.vue'
+import Cancel from '../views/Cancel.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -63,6 +65,21 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/wishlist',
+    name: 'WishList',
+    component: WishList
+  },
+  {
+    path: '/success',
+    name: 'Success',
+    component: Success
+  },
+  {
+    path: '/cancel',
+    name: 'Cancel',
+    component: Cancel
   },
   {
     path: '/about',
