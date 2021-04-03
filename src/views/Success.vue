@@ -1,18 +1,96 @@
 <template>
     <div>
-        <TitlePage title="Payement Accépté"/>
+        <TitlePage title="Payement Accépté" />
+        <img
+            src="../assets/check-mark-2180770_960_720.webp"
+            style="width: 100px"
+        />
+        <div class="shopping__cart">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Titre</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="product in cartArray" v-bind:key="product._id">
+                        <td><img :src="product.img" class="img__product" /></td>
+                        <td>{{ product.title }}</td>
+                        <td>{{ product.qty }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>
+                            {{
+                                (product.qty * product.price)
+                                    | formatPriceDecimal
+                                    | formatPrice
+                            }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div v-if="cartArray">
+            Prix total : {{ prcTotal | formatPriceDecimal | formatPrice }}
+        </div>
     </div>
 </template>
 
 <script>
+import VueJwtDecode from "vue-jwt-decode";
 import TitlePage from "../components/TitlePage";
-    export default {
-        components: {
-            TitlePage,
-        },
-    }
+import Cart from "../mixins/Cart";
+import apiConfigs from "../configs/api.configs";
+export default {
+    components: {
+        TitlePage,
+    },
+    data() {
+        return {
+            cartArray: [],
+            userObject: {},
+            prcTotal: 0,
+            total: "",
+            products: "",
+            user: "",
+        };
+    },
+    mixins: [Cart],
+    created() {
+        this.cartArray = this.getCart();
+        this.prcTotal = this.getCartTotal(this.cartArray);
+        const token = localStorage.getItem("token");
+        const decodedToken = VueJwtDecode.decode(token);
+        const body = {
+            total: this.prcTotal,
+            products: this.cartArray,
+            user: decodedToken.id,
+        };
+        console.log("body", body);
+        const bodyToSend = JSON.stringify(body);
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: bodyToSend,
+        };
+        fetch(`${apiConfigs.apiUrl}/order`, requestOptions)
+        .then((res) => res.json())
+        .catch((err) => console.log(err));
+        this.clearCart()
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-
+.shopping__cart {
+    width: 70%;
+    margin: 50px auto;
+}
+.img__product {
+    max-width: 200px;
+    max-height: 200px;
+}
 </style>
