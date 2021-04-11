@@ -25,4 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.products__grid{
+  
+}
 </style>

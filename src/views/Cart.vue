@@ -6,7 +6,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>Image</th>
                             <th>Titre</th>
                             <th></th>
                             <th>Quantité</th>

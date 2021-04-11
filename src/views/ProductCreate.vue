@@ -67,9 +67,7 @@ export default {
                 description: this.description,
                 price: this.price,
             };
-            console.log(body, "body JS");
             const bodyToSend = JSON.stringify(body);
-            console.log(bodyToSend, "body stringify");
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

@@ -1,14 +1,19 @@
 <template>
     <div>
-        <TitlePage title="Modifier le produit" />
-        <div class="product__update">
+        <TitlePage title="Modifier la commande" />
+        <div class="order__update">
             <div class="form">
                 <div class="form__data">Id: {{ _id }}</div>
-                <div class="form__data">Utilisateur: {{user.lastName}} {{user.firstName}} </div>
-                <div class="form__data">Total: {{total | formatPriceDecimal | formatPrice}}</div>
-                <div class="form__data">Produit:
+                <div class="form__data">
+                    Utilisateur: {{ user.lastName }} {{ user.firstName }}
+                </div>
+                <div class="form__data">
+                    Total: {{ total | formatPriceDecimal | formatPrice }}
+                </div>
+                <div class="form__data">
+                    Produit:
                     <div v-for="product in products" v-bind:key="product._id">
-                        {{product.title}}
+                        {{ product.title }}
                     </div>
                 </div>
                 <form @submit="edit">
@@ -63,9 +68,11 @@ export default {
             };
             fetch(`${apiConfigs.apiUrl}/order/update/${order}`, requestOptions)
                 .then((res) => res.json())
-                .then((data) => console.log(data))
+                .then((data) => {
+                    console.log(data);
+                    this.$router.push("/orderCRUD");
+                })
                 .catch((err) => console.log(err));
-            this.$router.push("/orderCRUD");
         },
     },
     created() {

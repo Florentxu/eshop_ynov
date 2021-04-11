@@ -6,7 +6,7 @@
         </div>
         <div class="input__content">
             Résultat de votre recherche = {{searchValue}}
-            <p>Ancienne recherche = {{oldSearchValue}}</p>
+            <!-- <p>Ancienne recherche = {{oldSearchValue}}</p> -->
         </div>
         <div class="search__content">
         <ProductsGrid :productsArray="filteredShop" />
@@ -29,7 +29,7 @@ export default {
     data: function() {
         return {
             searchValue: "",
-            oldSearchValue:"",
+            // oldSearchValue:"",
         };
     },
     mixins: [ApiProducts],
@@ -52,7 +52,7 @@ export default {
     computed:{
         filteredShop: function(){
             let filter = new RegExp(this.searchValue, "i");
-            return this.productsFromApi.filter(item => item.title.match(filter));
+            return this.productsFromApi.filter(item => item.title.match(filter)|| item.description.match(filter));
         }
     },
     // watch: {

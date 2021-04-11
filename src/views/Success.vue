@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TitlePage title="Payement Accépté" />
+        <TitlePage title="Payement Accepté" />
         <img
             src="../assets/check-mark-2180770_960_720.webp"
             style="width: 100px"
@@ -36,14 +36,14 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <!-- <td>{{ prcDelivery | formatPriceDecimal | formatPrice }}</td>
-                        <td>{{ prcDelivery | formatPriceDecimal | formatPrice }}</td> -->
+                        <td>{{ prcDelivery | formatPriceDecimal | formatPrice }}</td>
+                        <td>{{ prcDelivery | formatPriceDecimal | formatPrice }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div v-if="cartArray">
-            Prix total : {{ prcTotal | formatPriceDecimal | formatPrice }}
+            Prix total : {{ prcTotal+prcDelivery | formatPriceDecimal | formatPrice }}
         </div>
     </div>
 </template>
@@ -65,16 +65,18 @@ export default {
             total: "",
             products: "",
             user: "",
+            prcDelivery:5,
         };
     },
     mixins: [Cart],
     created() {
+        const prcDelivery = 5;
         this.cartArray = this.getCart();
         this.prcTotal = this.getCartTotal(this.cartArray);
         const token = localStorage.getItem("token");
         const decodedToken = VueJwtDecode.decode(token);
         const body = {
-            total: this.prcTotal,
+            total: this.prcTotal+prcDelivery,
             products: this.cartArray,
             user: decodedToken.id,
         };
@@ -89,7 +91,7 @@ export default {
         .then((res) => res.json())
         .catch((err) => console.log(err));
     },destroyed () {
-        // this.clearCart()
+        this.clearCart()
     },
 };
 </script>

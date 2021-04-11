@@ -8,12 +8,34 @@
                 <p>Téléphone :{{ user.tel }}</p>
                 <p>Email :{{ user.email }}</p>
                 <p>Adresse :{{ user.address.street }} {{ user.address.ccode }} {{ user.address.city }} {{ user.address.country }}</p>
-                <p></p>
             </div>
             <div>
-                <Button buttonClass="btn-black" :buttonFunction="goToEdit" buttonName="Modifier les informations" /> |
-                <button @click="logout()">Déconnexion</button>
+                <Button buttonClass="btn btn-black" :buttonFunction="goToEdit" buttonName="Modifier les informations" />
             </div>
+            <table class="order__table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Status</th>
+                    <th>Produits</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="order in user.orders" v-bind:key="order._id">
+                    
+                    <td>{{ order._id }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        <p v-for="product in order.products" v-bind:key="product">
+                        {{ product }}
+                        </p>
+                    </td>
+                    <td>{{ order.total | formatPriceDecimal | formatPrice}}</td>
+                </tr>
+            </tbody>
+        </table>
+
         </div>
         <div v-else>
             Vous n'etes pas connecté
@@ -53,5 +75,13 @@ export default {
     mixins: [User],
 };
 </script>
-
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.order__table{
+    margin: auto;
+}
+.order__table thead{
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    border-color: black;
+}</style>
