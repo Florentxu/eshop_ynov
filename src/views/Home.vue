@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <h1>{{ myTitle }}</h1>
-    <p>j'ai {{ myAge }} ans</p>
+    <h1>{{ myTitle }}</h1>  
+        <p>j'ai {{ myAge }} ans</p>
     <p>
       {{ myAge > 30 ? "je suis vieux" : "je suis jeune" }}
     </p>
@@ -40,9 +40,11 @@
 </template>
 
 <script>
+import Button from '../components/Button.vue';
 // @ is an alias to /src
 
 export default {
+  components: { Button },
   name: "Home",
   methods: {
     sayHello: function(){
@@ -53,7 +55,7 @@ export default {
   data: function() {
     return {
       myTitle: "Ma homepage",
-      myAge: 30,
+      myAge: 0,
       percentCa: 2000,
       isVisible: false,
       textStyling: "<strong>This text is bold</strong>",

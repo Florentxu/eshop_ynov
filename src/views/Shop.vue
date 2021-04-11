@@ -28,7 +28,6 @@ export default {
     },
     data: function() {
         return {
-            productsFromApi: [],
             searchValue: "",
             oldSearchValue:"",
         };
@@ -45,13 +44,6 @@ export default {
     //     .catch(err => console.log(err))
     //     }
     // },
-    created() {
-        this.getProducts()
-            .then((data) => {
-                this.productsFromApi = data;
-            })
-            .catch((err) => console.log(err));
-    },
     methods: {
         search: function() {
             console.log(this.searchValue);
@@ -63,11 +55,11 @@ export default {
             return this.productsFromApi.filter(item => item.title.match(filter));
         }
     },
-    watch: {
-        searchValue: function(newValue, oldValue) {
-            this.oldSearchValue = oldValue;
-        }
-    },
+    // watch: {
+    //     searchValue: function(newValue, oldValue) {
+    //         this.oldSearchValue = oldValue;
+    //     }
+    // },
 };
 </script>
 

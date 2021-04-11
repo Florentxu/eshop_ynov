@@ -13,6 +13,18 @@ import WishList from '../views/WishList.vue'
 import EditUser from '../views/EditUser.vue'
 import Success from '../views/Success.vue'
 import Cancel from '../views/Cancel.vue'
+import Admin from '../views/Admin.vue'
+import ProductCRUD from '../views/ProductCRUD.vue'
+import ProductCreate from '../views/ProductCreate.vue'
+import ProductUpdate from '../views/ProductUpdate.vue'
+import UserCRUD from '../views/UserCRUD.vue'
+import UserCreate from '../views/UserCreate.vue'
+import UserUpdate from '../views/UserUpdate.vue'
+import CategoryCRUD from '../views/CategoryCRUD.vue'
+import CategoryUpdate from '../views/CategoryUpdate.vue'
+import OrderCRUD from '../views/OrderCRUD.vue'
+import OrderUpdate from '../views/OrderUpdate.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -93,6 +105,60 @@ const routes = [
     path: '/shop',
     name: 'Shop',
     component: Shop
+  },
+  {
+    path: '/admin',
+    name: 'Admin ',
+    component: Admin
+  },
+  {
+    path: '/productCRUD',
+    name: 'ProductCRUD ',
+    component: ProductCRUD
+  },
+  {
+    path: '/productCreate',
+    name: 'ProductCreate',
+    component: ProductCreate
+  },
+  {
+    path: '/productUpdate',
+    name: 'ProductUpdate',
+    component: ProductUpdate
+  },
+  {
+    path: '/userCRUD',
+    name: 'UserCRUD ',
+    component: UserCRUD
+  },
+  {
+    path: '/userCreate',
+    name: 'UserCreate',
+    component: UserCreate
+  },
+  {
+    path: '/userUpdate',
+    name: 'UserUpdate',
+    component: UserUpdate
+  },
+  {
+    path: '/categoryCRUD',
+    name: 'CategoryCRUD',
+    component: CategoryCRUD
+  },  {
+    path: '/categoryUpdate',
+    name: 'CategoryUpdate',
+    component: CategoryUpdate
+  },
+  {
+    path: '/orderCRUD',
+    name: 'OrderCRUD',
+    component: OrderCRUD
+  },
+  {
+    path: '/orderUpdate',
+    name: 'OrderUpdate',
+    component: OrderUpdate
   }
 ]
 

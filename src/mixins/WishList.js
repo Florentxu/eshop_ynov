@@ -13,12 +13,10 @@ export default {
             let indexOfExistingProduct = wishlist.findIndex(
                 (el) => el._id === productToAdd._id
             )
-            if (indexOfExistingProduct !== -1) {
-                wishlist[indexOfExistingProduct].qty += 1
-            } else {
+            if (indexOfExistingProduct == -1) {
                 wishlist.push(productToAdd);
-                console.log(wishlist, "wishlist before stringify");
             }
+            
             let wishListToSend = JSON.stringify(wishlist);
             console.log(wishListToSend);
 

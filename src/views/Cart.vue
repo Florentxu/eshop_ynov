@@ -2,51 +2,92 @@
     <div class="shopping__cart">
         <TitlePage title="Panier" />
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Titre</th>
-                        <th></th>
-                        <th>Quantité</th>
-                        <th></th>
-                        <th>Prix</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="product in cartArray" v-bind:key="product._id">
-                        <td><img :src="product.img" class="img__product" /></td>
-                        <td>{{ product.title }}</td>
-                        <td><button @click="removeOne(product)">-</button></td>
-                        <td>{{ product.qty }}</td>
-                        <td>
-                            <button @click="addItemToCart(product)">+</button>
-                        </td>
-                        <td>{{ product.price }}</td>
-                        <td>
-                            {{
-                                (product.qty * product.price)
-                                    | formatPriceDecimal
-                                    | formatPrice
-                            }}
-                        </td>
-                        <td>
-                            <button @click="removeItem(product)">
-                                Supprimer l'élément
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div v-if="cartArray">Quantité total : {{ qtyTotal }}</div>
-        <div v-if="cartArray">
-            Prix total : {{ prcTotal | formatPriceDecimal | formatPrice }}
-        </div>
-        <button @click="clear()">Vider le panier</button>
-        <div>
-            <button @click="checkout()" class="payer" >Payer</button>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Titre</th>
+                            <th></th>
+                            <th>Quantité</th>
+                            <th></th>
+                            <th>Prix</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="product in cartArray"
+                            v-bind:key="product._id"
+                        >
+                            <td>
+                                <img :src="product.img" class="img__product" />
+                            </td>
+                            <td>{{ product.title }}</td>
+                            <td>
+                                <button @click="removeOne(product)">-</button>
+                            </td>
+                            <td>{{ product.qty }}</td>
+                            <td>
+                                <button @click="addItemToCart(product)">
+                                    +
+                                </button>
+                            </td>
+                            <td >
+                                {{
+                                    product.price
+                                        | formatPriceDecimal
+                                        | formatPrice
+                                }}
+                            </td>
+                            <td >
+                                {{
+                                    (product.qty * product.price)
+                                        | formatPriceDecimal
+                                        | formatPrice
+                                }}
+                            </td>
+                            <td>
+                                <button @click="removeItem(product)">
+                                    Supprimer l'élément
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Livraison: Chronopost</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                {{
+                                    prcDelivery
+                                        | formatPriceDecimal
+                                        | formatPrice
+                                }}
+                            </td>
+                            <td>
+                                {{
+                                    prcDelivery
+                                        | formatPriceDecimal
+                                        | formatPrice
+                                }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div v-if="cartArray">Quantité total : {{ qtyTotal }}</div>
+            <div v-if="cartArray">
+                Prix total :
+                {{
+                    (prcTotal + prcDelivery) | formatPriceDecimal | formatPrice
+                }}
+            </div>
+            <button @click="clear()">Vider le panier</button>
+            <div>
+                <button @click="checkout()" class="payer">Payer</button>
+            </div>
         </div>
     </div>
 </template>
@@ -64,16 +105,11 @@ export default {
     components: {
         TitlePage,
     },
-    props: {
-        prix:{
-            type: String,
-            default: "3500"
-        },
-    },
     data: function() {
         return {
             cartArray: [],
-            prix: this.prcTotal*100
+            prix: this.prcTotal * 100,
+            prcDelivery: 5,
             // qtyTotal:0,
             // prcTotal:0,
         };
@@ -81,7 +117,7 @@ export default {
     created() {
         this.cartArray = this.getCart();
         console.log(this.getCart);
-        console.log(this.prcTotal.toFixed(2)*100);
+        console.log(this.prcTotal.toFixed(2) * 100);
         // this.qtyTotal = this.getCartCount(this.cartArray);
         // this.prcTotal = this.getCartTotal(this.cartArray);
     },
@@ -111,32 +147,36 @@ export default {
             this.cartArray = this.getCart();
         },
         checkout: async function() {
-                // Get Stripe.js instance
-                const stripe = await stripePromise;
-                console.log("stripe", stripe);
-                // Call your backend to create the Checkout Session
-                const response = await fetch(`${apiConfigs.apiUrl}/create-checkout-session`, {
+            // Get Stripe.js instance
+            const stripe = await stripePromise;
+            console.log("stripe", stripe);
+            const amount = this.prcTotal + this.prcDelivery;
+            // Call your backend to create the Checkout Session
+            const response = await fetch(
+                `${apiConfigs.apiUrl}/create-checkout-session`,
+                {
                     method: "POST",
                     headers: {
-                        "Content-type":"application/json"
+                        "Content-type": "application/json",
                     },
-                    body:JSON.stringify({
-                        amount: this.prcTotal.toFixed(2)*100
-                    })
-                });
-                console.log("response", response);
-
-                const session = await response.json();
-                console.log("session", session);
-                // When the customer clicks on the button, redirect them to Checkout.
-                const result = await stripe.redirectToCheckout({
-                    sessionId: session.id,
-                });
-                console.log("result",result);
-
-                if (result.error) {
-                    console.log(result.error);
+                    body: JSON.stringify({
+                        amount: amount.toFixed(2) * 100,
+                    }),
                 }
+            );
+            console.log("response", response);
+
+            const session = await response.json();
+            console.log("session", session);
+            // When the customer clicks on the button, redirect them to Checkout.
+            const result = await stripe.redirectToCheckout({
+                sessionId: session.id,
+            });
+            console.log("result", result);
+
+            if (result.error) {
+                console.log(result.error);
+            }
         },
     },
 };

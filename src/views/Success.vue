@@ -21,7 +21,7 @@
                         <td><img :src="product.img" class="img__product" /></td>
                         <td>{{ product.title }}</td>
                         <td>{{ product.qty }}</td>
-                        <td>{{ product.price }}</td>
+                        <td>{{ product.price | formatPriceDecimal | formatPrice}}</td>
                         <td>
                             {{
                                 (product.qty * product.price)
@@ -29,6 +29,15 @@
                                     | formatPrice
                             }}
                         </td>
+                    </tr>
+                                        <tr>
+                        <td></td>
+                        <td>Livraison: Chronopost</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <!-- <td>{{ prcDelivery | formatPriceDecimal | formatPrice }}</td>
+                        <td>{{ prcDelivery | formatPriceDecimal | formatPrice }}</td> -->
                     </tr>
                 </tbody>
             </table>
@@ -79,7 +88,8 @@ export default {
         fetch(`${apiConfigs.apiUrl}/order`, requestOptions)
         .then((res) => res.json())
         .catch((err) => console.log(err));
-        this.clearCart()
+    },destroyed () {
+        // this.clearCart()
     },
 };
 </script>

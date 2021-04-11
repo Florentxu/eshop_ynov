@@ -33,8 +33,8 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
         <button @click="clear()">Vider la liste</button>
+        </div>
     </div>
 </template>
 
@@ -58,10 +58,10 @@ export default {
     methods: {
         removeItem(product) {
             this.removeItemWishList(product);
-            this.wishListArray = this.getCart();
+            this.wishListArray = this.getWishList();
         },
         addItemToCart: function(product) {
-            this.addOneQty(product);
+            this.addToCart(product);
             this.cartArray = this.getCart();
         },
         clear(){

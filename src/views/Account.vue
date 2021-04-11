@@ -1,71 +1,57 @@
 <template>
-    <div >
+    <div>
         <TitlePage title="Account" />
         <div v-if="isLogged">
             <div class="user__info" v-if="user">
-                <p>Nom :{{user.firstName}}</p>
-                <p>Prenom:{{user.lastName}}</p>
-                <p>Email :{{user.email}}</p>
+                <p>Nom :{{ user.firstName }}</p>
+                <p>Prenom:{{ user.lastName }}</p>
+                <p>Téléphone :{{ user.tel }}</p>
+                <p>Email :{{ user.email }}</p>
+                <p>Adresse :{{ user.address.street }} {{ user.address.ccode }} {{ user.address.city }} {{ user.address.country }}</p>
                 <p></p>
-                <button @click="goToEdit()">Modifier les informations</button> | 
+            </div>
+            <div>
+                <Button buttonClass="btn-black" :buttonFunction="goToEdit" buttonName="Modifier les informations" /> |
                 <button @click="logout()">Déconnexion</button>
             </div>
         </div>
         <div v-else>
             Vous n'etes pas connecté
         </div>
+        <div class="user__order" v-if="user.order">
+            presence de order
+        </div>
     </div>
 </template>
 
 <script>
-    import VueJwtDecode from "vue-jwt-decode";
-    import TitlePage from "../components/TitlePage";
-    import Bouton from "../components/Button";
-    import apiConfigs from '../configs/api.configs';
-    export default {
-        components: {
-            TitlePage,
-            Bouton
+import VueJwtDecode from "vue-jwt-decode";
+import TitlePage from "../components/TitlePage";
+import Button from "../components/Button";
+import User from "../mixins/User";
+import apiConfigs from "../configs/api.configs";
+export default {
+    components: {
+        TitlePage,
+        Button,
+    },
+    methods: {
+        logout: function() {
+            localStorage.removeItem("token");
+            this.isLogged = false;
+            this.$router.push("/login");
         },
-        methods: {
-            logout: function () {
-                localStorage.removeItem('token');
-                this.isLogged = false;
-                this.$router.push('/login');
-            },
-            goToEdit() {
-                const token = localStorage.getItem('token');
-                const decodedToken = VueJwtDecode.decode(token);
-                this.$router.push({name:'EditUser', params:{ id: `${decodedToken.id}`}})
-            }
+        goToEdit() {
+            const token = localStorage.getItem("token");
+            const decodedToken = VueJwtDecode.decode(token);
+            this.$router.push({
+                name: "EditUser",
+                params: { id: `${decodedToken.id}` },
+            });
         },
-        data: function () {
-            return {
-                user:{},
-                isLogged:false
-                }
-        },
-        created () {
-            const token = localStorage.getItem('token');
-            if (token){
-                const decodedToken = VueJwtDecode.decode(token);
-                fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`,{
-                    headers: {
-                        Authorization: token,
-                    }
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    this.user = data;
-                    this.isLogged = true;
-                    })
-                .catch(err => console.log(err))
-            }
-        }
-    }
+    },
+    mixins: [User],
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
