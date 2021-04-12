@@ -3,7 +3,7 @@
         <TitlePage title="Panier" />
         <div>
             <div>
-                <table>
+                <table class="cart__table">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -25,22 +25,30 @@
                             </td>
                             <td>{{ product.title }}</td>
                             <td>
-                                <button @click="removeOne(product)">-</button>
+                                <button
+                                    class="btn btn-grey"
+                                    @click="removeOne(product)"
+                                >
+                                    -
+                                </button>
                             </td>
                             <td>{{ product.qty }}</td>
                             <td>
-                                <button @click="addItemToCart(product)">
+                                <button
+                                    class="btn btn-grey"
+                                    @click="addItemToCart(product)"
+                                >
                                     +
                                 </button>
                             </td>
-                            <td >
+                            <td>
                                 {{
                                     product.price
                                         | formatPriceDecimal
                                         | formatPrice
                                 }}
                             </td>
-                            <td >
+                            <td>
                                 {{
                                     (product.qty * product.price)
                                         | formatPriceDecimal
@@ -48,12 +56,15 @@
                                 }}
                             </td>
                             <td>
-                                <button @click="removeItem(product)">
+                                <button
+                                    class="btn btn-red"
+                                    @click="removeItem(product)"
+                                >
                                     Supprimer l'élément
                                 </button>
                             </td>
                         </tr>
-                        <tr>
+                        <tr v-if="cartArray">
                             <td></td>
                             <td>Livraison: Chronopost</td>
                             <td></td>
@@ -84,9 +95,11 @@
                     (prcTotal + prcDelivery) | formatPriceDecimal | formatPrice
                 }}
             </div>
-            <button @click="clear()">Vider le panier</button>
+            <button class="btn btn-red" @click="clear()">
+                Vider le panier
+            </button>
             <div>
-                <button @click="checkout()" class="payer">Payer</button>
+                <button class="btn btn-green" @click="checkout()">Payer</button>
             </div>
         </div>
     </div>
@@ -198,5 +211,64 @@ export default {
     color: white;
     background-color: red;
     font-size: 50px;
+}
+.cart__table,
+td {
+    margin-top: 20px;
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: auto;
+}
+.cart__table th {
+    padding: 20px;
+    background-color: rgb(65, 184, 131);
+    color: white;
+    font-size: 20px;
+    width: auto;
+}
+.cart__table td {
+    padding: 20px;
+}
+
+.btn {
+    display: inline-block;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s all;
+    padding: 15px;
+    margin: 15px;
+}
+
+.btn {
+    &-green {
+        background: rgb(65, 184, 131);
+        color: white;
+        border: 1px solid rgb(65, 184, 131);
+
+        &:hover {
+            background: white;
+            color: rgb(65, 184, 131);
+        }
+    }
+
+    &-red {
+        background: red;
+        color: white;
+        border: 1px solid red;
+        &:hover {
+            background: white;
+            color: red;
+        }
+    }
+    &-grey {
+        background: darkgrey;
+        color: white;
+        &:hover {
+            background-color: white;
+            color: darkgrey;
+        }
+    }
 }
 </style>

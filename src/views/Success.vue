@@ -6,7 +6,7 @@
             style="width: 100px"
         />
         <div class="shopping__cart">
-            <table>
+            <table class="success__table">
                 <thead>
                     <tr>
                         <th></th>
@@ -21,7 +21,11 @@
                         <td><img :src="product.img" class="img__product" /></td>
                         <td>{{ product.title }}</td>
                         <td>{{ product.qty }}</td>
-                        <td>{{ product.price | formatPriceDecimal | formatPrice}}</td>
+                        <td>
+                            {{
+                                product.price | formatPriceDecimal | formatPrice
+                            }}
+                        </td>
                         <td>
                             {{
                                 (product.qty * product.price)
@@ -30,20 +34,23 @@
                             }}
                         </td>
                     </tr>
-                                        <tr>
+                    <tr v-if="cartArray">
                         <td></td>
                         <td>Livraison: Chronopost</td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{{ prcDelivery | formatPriceDecimal | formatPrice }}</td>
-                        <td>{{ prcDelivery | formatPriceDecimal | formatPrice }}</td>
+                        <td>
+                            {{ prcDelivery | formatPriceDecimal | formatPrice }}
+                        </td>
+                        <td>
+                            {{ prcDelivery | formatPriceDecimal | formatPrice }}
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div v-if="cartArray">
-            Prix total : {{ prcTotal+prcDelivery | formatPriceDecimal | formatPrice }}
+            Prix total :
+            {{ (prcTotal + prcDelivery) | formatPriceDecimal | formatPrice }}
         </div>
     </div>
 </template>
@@ -65,7 +72,7 @@ export default {
             total: "",
             products: "",
             user: "",
-            prcDelivery:5,
+            prcDelivery: 5,
         };
     },
     mixins: [Cart],
@@ -76,7 +83,7 @@ export default {
         const token = localStorage.getItem("token");
         const decodedToken = VueJwtDecode.decode(token);
         const body = {
-            total: this.prcTotal+prcDelivery,
+            total: this.prcTotal + prcDelivery,
             products: this.cartArray,
             user: decodedToken.id,
         };
@@ -88,10 +95,11 @@ export default {
             body: bodyToSend,
         };
         fetch(`${apiConfigs.apiUrl}/order`, requestOptions)
-        .then((res) => res.json())
-        .catch((err) => console.log(err));
-    },destroyed () {
-        this.clearCart()
+            .then((res) => res.json())
+            .catch((err) => console.log(err));
+    },
+    destroyed() {
+        this.clearCart();
     },
 };
 </script>
@@ -104,5 +112,22 @@ export default {
 .img__product {
     max-width: 200px;
     max-height: 200px;
+}
+.success__table,
+td {
+    margin-top: 20px;
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: auto;
+}
+.success__table th {
+    padding: 20px;
+    background-color: rgb(65, 184, 131);
+    color: white;
+    font-size: 20px;
+    width: auto;
+}
+.success__table td {
+    padding: 20px;
 }
 </style>

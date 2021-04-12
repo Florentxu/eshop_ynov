@@ -29,31 +29,46 @@ export default {
     display: inline-block;
     border-radius: 50px;
     font-size: 15px;
+    font-weight: bold;
     text-transform: uppercase;
     transition: 0.3s all;
     padding: 15px;
+    margin: 15px;
 }
 
 .btn {
-    &-blue {
-        background: blue;
+
+    &-chocolate {
+        background: chocolate;
         color: white;
-        border: 1px solid blue;
+        border: 1px solid chocolate;
         &:hover {
-            background-color: white;
-            color: blue;
+            background: white;
+            color: chocolate;
+        }
+    }
+    
+    &-green {
+        background: rgb(65, 184, 131);
+        color: white;
+        border: 1px solid rgb(65, 184, 131);
+
+        &:hover {
+            background: white;
+            color: rgb(65, 184, 131);
         }
     }
 
-    &-green {
-        background: green;
+    &-red {
+        background: red;
         color: white;
+        border: 1px solid red;
+        &:hover {
+            background: white;
+            color: red;
+        }
     }
 
-    &-grey {
-        background: grey;
-        color: black;
-    }
     &-black {
         background: black;
         color: white;
@@ -70,6 +85,24 @@ export default {
         &:hover {
             background: black;
             color: white;
+        }
+    }
+    &-blue {
+        background: blue;
+        color: white;
+        border: 1px solid blue;
+        &:hover {
+            background-color: white;
+            color: blue;
+        }
+    }
+
+    &-grey {
+        background: darkgrey;
+        color: white;
+        &:hover {
+            background-color: white;
+            color: darkgrey;
         }
     }
 }

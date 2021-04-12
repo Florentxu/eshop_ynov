@@ -1,13 +1,13 @@
 <template>
     <div>
-        <TitlePage title="CategoryCRUD" />
+        <TitlePage title="Gestionnaire des catégories" />
         <div class="form">
             <form @submit.prevent="create">
                 <div class="form__group">
                     <label for="title">Titre</label><br />
                     <input type="text" name="title" v-model="title" required />
                 </div>
-                <div class="form__group">
+                <div class="form__button">
                     <input type="submit" value="Ajouter la categorie" />
                 </div>
             </form>
@@ -28,7 +28,7 @@
                     <td>{{ category._id }}</td>
                     <td>{{ category.title }}</td>
                     <td>
-                        <button class="btn_edit" @click="update(category._id)">
+                        <button class="btn btn-brown" @click="update(category._id)">
                             Modifier
                         </button>
                     </td>
@@ -80,22 +80,74 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.category__table {
+.category__table, td{
+    margin-top: 20px;
+    border-collapse: collapse ;
+    border: 1px solid black;
     margin: auto;
 }
-.category__table thead {
-    background-color: black;
+.category__table th{
+    padding: 20px;
+    background-color: rgb(65, 184, 131);
     color: white;
     font-size: 20px;
-    border-color: black;
+    width: auto;
+}
+.category__table td{
+    padding: 20px;
 }
 .form {
-    border: 1px solid;
-    background-color: grey;
+    border: 1px solid lightgrey; 
     border-radius: 15px;
-    width: 20rem;
+    width: 40%;
     margin: auto;
-    margin-bottom: 20px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.form__group{
+    margin-bottom: 10px;
+}
+.form__group label{
+    font-size: bold;
+}
+.form__group input{
+    width:40%;
+}
+.form__button input{
+    background: blue;
+    border: none;
+    border-radius: 10px ;
     color: white;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+}
+.form__button input:hover{
+    background: steelblue;
+}
+
+.btn {
+    display: inline-block;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s all;
+    padding: 15px;
+    margin: 15px;
+}
+
+.btn {
+
+    &-brown {
+        background: brown;
+        color: white;
+        border: 1px solid brown;
+        &:hover {
+            background: white;
+            color: brown;
+        }
+    }
 }
 </style>

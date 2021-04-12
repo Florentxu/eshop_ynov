@@ -1,7 +1,7 @@
 <template>
     <div>
-        <TitlePage title="UserCRUD" />
-        <button @click="create">Ajouter un utilisateurs</button>
+        <TitlePage title="Gestionnaire des utilisateurs" />
+        <button class="btn btn-green" @click="create">Ajouter un utilisateurs</button>
         <table class="user__table">
             <thead>
                 <tr>
@@ -30,10 +30,10 @@
                     </td>
                     <td>{{ user.isAdmin }}</td>
                     <td>
-                        <button class="btn_edit" @click="update(user._id)">
+                        <button class="btn btn-brown" @click="update(user._id)">
                             Modifier
-                        </button>
-                        <button class="btn_delete" @click="remove(user._id)">
+                        </button></br>
+                        <button class="btn btn-red" @click="remove(user._id)">
                             Supprimer
                         </button>
                     </td>
@@ -77,13 +77,64 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user__table {
+.user__table, td{
+    margin-top: 20px;
+    border-collapse: collapse ;
+    border: 1px solid black;
     margin: auto;
 }
-.user__table thead {
-    background-color: black;
+.user__table th{
+    padding: 20px;
+    background-color: rgb(65, 184, 131);
     color: white;
     font-size: 20px;
-    border-color: black;
+    width: auto;
+}
+.user__table td{
+    padding: 20px;
+}
+.btn {
+    display: inline-block;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s all;
+    padding: 15px;
+    margin: 15px;
+}
+
+.btn {
+
+    &-brown {
+        background: brown;
+        color: white;
+        border: 1px solid brown;
+        &:hover {
+            background: white;
+            color: brown;
+        }
+    }
+    
+    &-green {
+        background: rgb(65, 184, 131);
+        color: white;
+        border: 1px solid rgb(65, 184, 131);
+
+        &:hover {
+            background: white;
+            color: rgb(65, 184, 131);
+        }
+    }
+
+    &-red {
+        background: red;
+        color: white;
+        border: 1px solid red;
+        &:hover {
+            background: white;
+            color: red;
+        }
+    }
 }
 </style>

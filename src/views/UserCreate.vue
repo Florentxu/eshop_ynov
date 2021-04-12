@@ -1,9 +1,8 @@
 <template>
     <div>
-        <TitlePage title="Creer un utilisateur" />
+        <TitlePage title="Créer un utilisateur" />
         <div
             class="form"
-            style="border: 1px solid; background-color: grey; border-radius: 15px"
         >
             <form @submit.prevent="create">
                 <div class="form__group">
@@ -50,7 +49,7 @@
                     <input type="password" name="password" v-model="password" />
                 </div>
 
-                <div class="form__group">
+                <div class="form__button">
                     <input type="submit" value="Créer l'utilisateur" />
                 </div>
             </form>
@@ -120,4 +119,34 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form {
+    border: 1px solid lightgrey; 
+    border-radius: 15px;
+    width: 40%;
+    margin: auto;
+    padding: 20px;
+}
+
+.form__group{
+    margin-bottom: 10px;
+}
+.form__group label{
+    font-size: bold;
+}
+.form__group input,select{
+    width:40%;
+}
+.form__button input{
+    background: blue;
+    border: none;
+    border-radius: 10px ;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+}
+.form__button input:hover{
+    background: steelblue;
+}
+</style>

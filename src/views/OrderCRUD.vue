@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TitlePage title="OrderCRUD" />
+        <TitlePage title="Gestionnaire des commandes" />
         <table class="order__table">
             <thead>
                 <tr>
@@ -25,7 +25,7 @@
                     <td>{{ order.user.lastName }} {{ order.user.firstName }}</td>
                     <td>{{ order.total | formatPriceDecimal | formatPrice}}</td>
                     <td>
-                        <button class="btn_edit" @click="update(order._id)">Modifier</button>
+                        <button class="btn btn-brown" @click="update(order._id)">Modifier</button>
                     </td>
                 </tr>
             </tbody>
@@ -63,13 +63,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.order__table{
+.order__table, td{
+    margin-top: 20px;
+    border-collapse: collapse ;
+    border: 1px solid black;
     margin: auto;
 }
-.order__table thead{
-    background-color: black;
+.order__table th{
+    padding: 20px;
+    background-color: rgb(65, 184, 131);
     color: white;
     font-size: 20px;
-    border-color: black;
+    width: auto;
+}
+.order__table td{
+    padding: 20px;
+}
+
+.btn {
+    display: inline-block;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s all;
+    padding: 15px;
+    margin: 15px;
+}
+
+.btn {
+
+    &-brown {
+        background: brown;
+        color: white;
+        border: 1px solid brown;
+        &:hover {
+            background: white;
+            color: brown;
+        }
+    }
 }
 </style>

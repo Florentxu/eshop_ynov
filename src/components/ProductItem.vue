@@ -1,20 +1,27 @@
 <template>
     <div class="product__item">
         <router-link :to="{ name: 'Product', params: { id: productObject._id }}" >
-            <p>{{ productObject.title }}</p>
+            <h3>{{ productObject.title }}</h3>
         </router-link>
-        <p><img :src="productObject.img" /></p>
+        <div class="container">
+
+        <div class="div__img">
+            <img class="product__img" :src="productObject.img" />
+        </div>
+        <div class="item__data">
         <p>Categorie: {{ productObject.category.title }}</p>
         <p>Description: {{ productObject.description }}</p>
         <p>Prix: {{ productObject.price | formatPriceDecimal | formatPrice}}</p>
-        <p>
+        </div>
+        <div>
             <button class="btn-icone" title="Ajouter au panier" @click="addItemToCart(productObject)">
-                <img class="img-icone" src="../assets/cart.png" />
+                <img class="icone-cart" src="../assets/cart.png" />
             </button>
             <button class="btn-icone" title="Ajouter à la wishlist" @click="addItemToWishList(productObject)">
-                <img class="img-icone" src="../assets/list.png" />
+                <img class="icone-list" src="../assets/list.png" />
             </button>
-        </p>
+        </div>
+        </div>
     </div>
 </template>
 <script>
@@ -48,13 +55,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.img-icone{
-            width: 50px;
+
+.container{
+  padding: 2px 16px;
+}
+.div__img{
+    height: 200px;
+    width: 200px;
+    margin: auto;
+}
+.product__img{
+max-width: 200px ;
+max-height: 200px;
+padding: auto;
+}
+.product__item {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    transition: 0.3s;
+    border: lightgrey solid 1px;
+}
+
+.item__data {
+    text-align: left;
+}
+
+h3{
+    color: black;
+    text-decoration: none;
+}
+
+.icone-cart {
+    width: 50px;
+
+}
+
+.icone-list{
+    width: 50px;
 }
 
 .btn-icone{
+    margin: 20px;
         border: none;
-        padding: 0;
+        padding: 1;
         background: none;
 }
 </style>

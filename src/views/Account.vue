@@ -2,6 +2,7 @@
     <div>
         <TitlePage title="Account" />
         <div v-if="isLogged">
+            <div class="user">
             <div class="user__info" v-if="user">
                 <p>Nom :{{ user.firstName }}</p>
                 <p>Prenom:{{ user.lastName }}</p>
@@ -9,8 +10,10 @@
                 <p>Email :{{ user.email }}</p>
                 <p>Adresse :{{ user.address.street }} {{ user.address.ccode }} {{ user.address.city }} {{ user.address.country }}</p>
             </div>
+            <div>Probleme avec le Header, besoin de faire "F5" pour actualiser le Header</div>
             <div>
                 <Button buttonClass="btn btn-black" :buttonFunction="goToEdit" buttonName="Modifier les informations" />
+            </div>
             </div>
             <table class="order__table">
             <thead>
@@ -40,9 +43,6 @@
         <div v-else>
             Vous n'etes pas connecté
         </div>
-        <div class="user__order" v-if="user.order">
-            presence de order
-        </div>
     </div>
 </template>
 
@@ -58,11 +58,12 @@ export default {
         Button,
     },
     methods: {
-        logout: function() {
-            localStorage.removeItem("token");
-            this.isLogged = false;
-            this.$router.push("/login");
-        },
+        // logout: function() {
+        //     localStorage.removeItem("token");
+        //     this.isLogged = false;
+        //     this.$router.push("/login");
+        // },
+
         goToEdit() {
             const token = localStorage.getItem("token");
             const decodedToken = VueJwtDecode.decode(token);
@@ -76,12 +77,33 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.order__table{
+
+.user{
+    border: lightgrey solid 1px;
+    width: 40%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.user__info{
+    margin: 10px;
+    text-align: left;
+    font-size: 15;
+}
+
+.order__table, td {
+    margin-top: 20px;
+    border-collapse: collapse ;
+    border: 1px solid black;
     margin: auto;
 }
-.order__table thead{
-    background-color: black;
+.order__table th{
+    padding: 10px 0px 10px 0px;
+    background-color: rgb(60, 151, 236);
     color: white;
     font-size: 20px;
-    border-color: black;
-}</style>
+    width: 300px;
+}
+
+
+</style>

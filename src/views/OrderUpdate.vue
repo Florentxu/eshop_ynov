@@ -25,7 +25,7 @@
                             <option value="Terminé">Terminé</option>
                         </select>
                     </div>
-                    <div class="form__group">
+                    <div class="form__button">
                         <input type="submit" value="Modifier" />
                     </div>
                 </form>
@@ -70,9 +70,10 @@ export default {
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);
-                    this.$router.push("/orderCRUD");
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => console.log(err))
+                this.$router.push("/orderCRUD");
+
         },
     },
     created() {
@@ -98,9 +99,35 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-    border: 1px solid;
-    background-color: grey;
+    border: 1px solid lightgrey; 
     border-radius: 15px;
+    width: 40%;
+    margin: auto;
+    padding: 20px;
+}
+.form__data{
+    margin-bottom: 10px;
+}
+.form__group{
+    margin-bottom: 10px;
+}
+.form__group label{
+    font-size: bold;
+}
+.form__group select{
+    width:40%;
+}
+.form__button input{
+    background: blue;
+    border: none;
+    border-radius: 10px ;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+}
+.form__button input:hover{
+    background: steelblue;
 }
 .form__img {
     max-width: 200px;

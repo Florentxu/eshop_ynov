@@ -4,7 +4,6 @@
         <div class="user__info" v-if="user">
             <div
                 class="form"
-                style="border: 1px solid; background-color: grey; border-radius: 15px"
             >
                 <form @submit="edit">
                     <div class="form__group">
@@ -39,7 +38,7 @@
                         <label for="country">Pays</label><br />
                         <input type="text" name="country" v-model="country" />
                     </div>
-                    <div class="form__group">
+                    <div class="form__button">
                         <input type="submit" value="Modifier" />
                     </div>
                 </form>
@@ -132,4 +131,34 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form {
+    border: 1px solid lightgrey; 
+    border-radius: 15px;
+    width: 40%;
+    margin: auto;
+    padding: 20px;
+}
+
+.form__group{
+    margin-bottom: 10px;
+}
+.form__group label{
+    font-size: bold;
+}
+.form__group input{
+    width:40%;
+}
+.form__button input{
+    background: blue;
+    border: none;
+    border-radius: 10px ;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+}
+.form__button input:hover{
+    background: steelblue;
+}
+</style>
