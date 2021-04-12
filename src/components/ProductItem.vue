@@ -10,7 +10,7 @@
         </div>
         <div class="item__data">
         <p>Categorie: {{ productObject.category.title }}</p>
-        <p>Description: {{ productObject.description }}</p>
+        <p class="description">Description: {{ productObject.description }}</p>
         <p>Prix: {{ productObject.price | formatPriceDecimal | formatPrice}}</p>
         </div>
         <div>
@@ -93,5 +93,10 @@ h3{
         border: none;
         padding: 1;
         background: none;
+}
+.description{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

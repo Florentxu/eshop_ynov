@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 .products__grid{
   display: inline-grid;
-  grid-template-columns: 300px 300px 300px 300px;
+  grid-template-columns: 300px 300px 300px;
   grid-gap: 60px;
   padding: 10px;}
 </style>
