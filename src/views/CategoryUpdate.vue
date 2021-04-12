@@ -3,7 +3,7 @@
         <TitlePage title="Modifier la catégorie" />
         <div class="category__update">
             <div class="form">
-                <form @submit="edit">
+                <form @submit.prevent="edit">
                     <div class="form__group">
                         <label for="title">Nom de la catégorie</label><br />
                         <input type="text" name="title" v-model="title" />
@@ -52,9 +52,11 @@ export default {
                 requestOptions
             )
                 .then((res) => res.json())
-                .then((data) => console.log(data))
+                .then((data) => 
+                    {console.log(data)
+                    this.$router.push("/categoryCRUD")
+                })
                 .catch((err) => console.log(err));
-                this.$router.push("/categoryCRUD");
         },
     },
     created() {

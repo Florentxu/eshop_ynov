@@ -16,7 +16,7 @@
                         {{ product.title }}
                     </div>
                 </div>
-                <form @submit="edit">
+                <form @submit.prevent="edit">
                     <div class="form__group">
                         <label for="status">Status</label><br />
                         <select name="status" v-model="status">
@@ -70,9 +70,9 @@ export default {
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);
+                    this.$router.push("/orderCRUD");
                 })
                 .catch((err) => console.log(err))
-                this.$router.push("/orderCRUD");
 
         },
     },

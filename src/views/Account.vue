@@ -10,7 +10,6 @@
                 <p>Email :{{ user.email }}</p>
                 <p>Adresse :{{ user.address.street }} {{ user.address.ccode }} {{ user.address.city }} {{ user.address.country }}</p>
             </div>
-            <div>Probleme avec le Header, besoin de faire "F5" pour actualiser le Header</div>
             <div>
                 <Button buttonClass="btn btn-black" :buttonFunction="goToEdit" buttonName="Modifier les informations" />
             </div>

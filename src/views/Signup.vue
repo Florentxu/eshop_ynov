@@ -111,6 +111,10 @@ export default {
                 .catch((err) => console.log(err));
         },
     },
+    beforeDestroy () {
+        // permet de rafraichir la page pour modifer le header
+        this.$router.go(0);
+    },
 };
 </script>
 

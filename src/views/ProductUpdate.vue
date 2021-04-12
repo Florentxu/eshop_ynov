@@ -3,7 +3,7 @@
         <TitlePage title="Modifier le produit" />
         <div class="product__update">
             <div class="form">
-                <form @submit="edit">
+                <form @submit.prevent="edit">
                     <img class="form__img" :src="img" />
                     <div class="form__group">
                         <label for="img">Image</label><br />
@@ -88,9 +88,11 @@ export default {
                 requestOptions
             )
                 .then((res) => res.json())
-                .then((data) => console.log(data))
+                .then((data) => {
+                    console.log(data)
+                    this.$router.push("/productCRUD");
+                })
                 .catch((err) => console.log(err));
-                this.$router.push("/productCRUD");
         },
     },
     created() {
