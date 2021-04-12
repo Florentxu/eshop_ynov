@@ -21,3 +21,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 Nom:    Xu 
 Prenom: Florent
 Lien:   https://my-eshop-ynov.herokuapp.com/#/
+
+Compte Admin:
+Email:      admin@gmail.com
+Password:   Admin.123456

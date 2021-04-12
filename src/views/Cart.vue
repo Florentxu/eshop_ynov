@@ -95,12 +95,10 @@
                     (prcTotal + prcDelivery) | formatPriceDecimal | formatPrice
                 }}
             </div>
+            <button class="btn btn-green" @click="checkout()">Payer</button>
             <button class="btn btn-red" @click="clear()">
                 Vider le panier
             </button>
-            <div>
-                <button class="btn btn-green" @click="checkout()">Payer</button>
-            </div>
         </div>
     </div>
 </template>
@@ -212,8 +210,7 @@ export default {
     background-color: red;
     font-size: 50px;
 }
-.cart__table,
-td {
+.cart__table, td {
     margin-top: 20px;
     border-collapse: collapse;
     border: 1px solid black;

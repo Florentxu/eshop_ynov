@@ -76,7 +76,16 @@ const routes = [
   {
     path: '/cart',
     name: 'Cart',
-    component: Cart
+    component: Cart,
+    beforeEnter(to, from, next) {
+      if(localStorage.getItem('token')){
+        next();
+      } else {
+        next({
+          name:"Login"
+        })
+      }
+    }
   },
   {
     path: '/wishlist',

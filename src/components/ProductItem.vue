@@ -41,15 +41,10 @@ export default {
         addItemToCart: function(product) {
             this.addToCart(product);
         },
-        clearItemCart: function() {
-            this.clearCart();
-        },
         addItemToWishList: function(product) {
             this.addToWishList(product);
         },
-        clearItemWishList: function() {
-            this.clearWishList();
-        },
+
     },
 };
 </script>

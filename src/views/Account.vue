@@ -83,6 +83,7 @@ export default {
     width: 40%;
     margin: auto;
     margin-bottom: 10px;
+    
 }
 
 .user__info{
